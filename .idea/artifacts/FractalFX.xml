@@ -1,0 +1,20 @@
+<component name="ArtifactManager">
+  <artifact type="javafx" build-on-make="true" name="FractalFX">
+    <output-path>$PROJECT_DIR$/out/artifacts/FractalFX</output-path>
+    <properties id="javafx-properties">
+      <options>
+        <option name="appClass" value="ch.herzog.fractalfx.FractalFX" />
+        <option name="description" value="" />
+        <option name="htmlPlaceholderId" value="" />
+        <option name="title" value="FractalFX" />
+        <option name="vendor" value="" />
+        <option name="version" value="1.0" />
+      </options>
+    </properties>
+    <root id="root">
+      <element id="archive" name="FractalFX.jar">
+        <element id="module-output" name="FractalFX" />
+      </element>
+    </root>
+  </artifact>
+</component>
