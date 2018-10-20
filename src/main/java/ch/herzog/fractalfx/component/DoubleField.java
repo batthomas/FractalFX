@@ -1,4 +1,4 @@
-package ch.herzog.fractalfx.components;
+package ch.herzog.fractalfx.component;
 
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;

@@ -1,8 +1,9 @@
-package ch.herzog.fractalfx.dialogs;
+package ch.herzog.fractalfx.dialog;
 
-import ch.herzog.fractalfx.components.DoubleField;
-import ch.herzog.fractalfx.components.IntegerField;
-import ch.herzog.fractalfx.concurrent.MandelbrotImageTask;
+import ch.herzog.fractalfx.component.DoubleField;
+import ch.herzog.fractalfx.component.IntegerField;
+import ch.herzog.fractalfx.concurrent.ImageGenerationTask;
+import ch.herzog.fractalfx.fractal.Mandelbrot;
 import javafx.geometry.Insets;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
@@ -11,7 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 
-public class ImageCreationDialog extends Dialog<MandelbrotImageTask> {
+public class ImageCreationDialog extends Dialog<ImageGenerationTask> {
 
     private IntegerField widthSpinner;
     private IntegerField heightSpinner;
@@ -32,14 +33,14 @@ public class ImageCreationDialog extends Dialog<MandelbrotImageTask> {
 
         setResultConverter(dialogButton -> {
             if (dialogButton == generateButton) {
-                return new MandelbrotImageTask(
+                return new ImageGenerationTask(new Mandelbrot(
                         widthSpinner.getValue(),
                         heightSpinner.getValue(),
                         centerXSpinner.getValue(),
                         centerYSpinner.getValue(),
                         scaleSpinner.getValue(),
                         iterationsSpinner.getValue()
-                );
+                ));
             }
             return null;
         });

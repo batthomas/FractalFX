@@ -3,12 +3,12 @@
 <?import javafx.scene.canvas.Canvas?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.121"
+<AnchorPane prefHeight="500.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/8.0.121"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.herzog.fractalfx.controller.FractalFXUIController">
     <MenuBar layoutX="1.0" layoutY="2.0" prefHeight="25.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0"
              AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <Menu mnemonicParsing="false" text="File">
-            <MenuItem mnemonicParsing="false" text="Close"/>
+            <MenuItem mnemonicParsing="false" text="Exit"/>
         </Menu>
         <Menu mnemonicParsing="false" text="Edit">
             <MenuItem mnemonicParsing="false" text="Delete"/>
@@ -21,18 +21,21 @@
             <MenuItem mnemonicParsing="false" text="About"/>
         </Menu>
     </MenuBar>
+
     <AnchorPane layoutX="-19.0" layoutY="286.0" prefHeight="20.0" prefWidth="200.0" styleClass="statusbar"
                 AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
         <ProgressBar fx:id="mandelbrotProgress" layoutX="17.0" layoutY="1.0" prefWidth="200.0" progress="0.0"
                      AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="7.0"/>
     </AnchorPane>
-    <ScrollPane layoutX="252.0" layoutY="71.0" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="20.0"
-                AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
+    <ScrollPane layoutX="294.0" layoutY="71.0" prefHeight="455.0" prefWidth="606.0" AnchorPane.bottomAnchor="20.0"
+                AnchorPane.leftAnchor="250.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
 
-        <AnchorPane fx:id="canvasContainer" minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="100.0">
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="100.0">
             <Canvas fx:id="canvas" height="75.0" layoutX="22.0" layoutY="30.0" width="75.0"
                     AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
                     AnchorPane.topAnchor="0.0"/>
         </AnchorPane>
     </ScrollPane>
+    <TreeView fx:id="treeView" layoutY="25.0" prefHeight="455.0" prefWidth="250.0" AnchorPane.bottomAnchor="20.0"
+              AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="25.0"/>
 </AnchorPane>

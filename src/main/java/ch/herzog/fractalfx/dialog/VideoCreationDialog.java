@@ -1,8 +1,9 @@
-package ch.herzog.fractalfx.dialogs;
+package ch.herzog.fractalfx.dialog;
 
-import ch.herzog.fractalfx.components.DoubleField;
-import ch.herzog.fractalfx.components.IntegerField;
-import ch.herzog.fractalfx.concurrent.MandelbrotVideoTask;
+import ch.herzog.fractalfx.component.DoubleField;
+import ch.herzog.fractalfx.component.IntegerField;
+import ch.herzog.fractalfx.concurrent.VideoGenerationTask;
+import ch.herzog.fractalfx.fractal.Mandelbrot;
 import javafx.geometry.Insets;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
@@ -11,13 +12,13 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 
-public class VideoCreationDialog extends Dialog<MandelbrotVideoTask> {
+public class VideoCreationDialog extends Dialog<VideoGenerationTask> {
 
     private IntegerField widthSpinner;
     private IntegerField heightSpinner;
     private DoubleField centerXSpinner;
     private DoubleField centerYSpinner;
-
+    private DoubleField scaleSpinner;
     private IntegerField iterationsSpinner;
     private IntegerField framesPerSecondSpinner;
     private IntegerField secondsSpinner;
@@ -35,12 +36,15 @@ public class VideoCreationDialog extends Dialog<MandelbrotVideoTask> {
 
         setResultConverter(dialogButton -> {
             if (dialogButton == generateButton) {
-                return new MandelbrotVideoTask(
-                        widthSpinner.getValue(),
-                        heightSpinner.getValue(),
-                        centerXSpinner.getValue(),
-                        centerYSpinner.getValue(),
-                        iterationsSpinner.getValue(),
+                return new VideoGenerationTask(
+                        new Mandelbrot(
+                                widthSpinner.getValue(),
+                                heightSpinner.getValue(),
+                                centerXSpinner.getValue(),
+                                centerYSpinner.getValue(),
+                                scaleSpinner.getValue(),
+                                iterationsSpinner.getValue()
+                        ),
                         secondsSpinner.getValue(),
                         framesPerSecondSpinner.getValue(),
                         zoomPerSecondSpinner.getValue()
@@ -77,25 +81,30 @@ public class VideoCreationDialog extends Dialog<MandelbrotVideoTask> {
         grid.add(new Label("Center Y:"), 0, 3);
         grid.add(centerYSpinner, 1, 3);
 
+        scaleSpinner = new DoubleField();
+        scaleSpinner.setEditable(true);
+        grid.add(new Label("Scale:"), 0, 4);
+        grid.add(scaleSpinner, 1, 4);
+
         iterationsSpinner = new IntegerField();
         iterationsSpinner.setEditable(true);
-        grid.add(new Label("Iterations:"), 0, 4);
-        grid.add(iterationsSpinner, 1, 4);
+        grid.add(new Label("Iterations:"), 0, 5);
+        grid.add(iterationsSpinner, 1, 5);
 
         framesPerSecondSpinner = new IntegerField();
         framesPerSecondSpinner.setEditable(true);
-        grid.add(new Label("Frames per second:"), 0, 5);
-        grid.add(framesPerSecondSpinner, 1, 5);
+        grid.add(new Label("Frames per second:"), 0, 6);
+        grid.add(framesPerSecondSpinner, 1, 6);
 
         secondsSpinner = new IntegerField();
         secondsSpinner.setEditable(true);
-        grid.add(new Label("Seconds:"), 0, 6);
-        grid.add(secondsSpinner, 1, 6);
+        grid.add(new Label("Seconds:"), 0, 7);
+        grid.add(secondsSpinner, 1, 7);
 
         zoomPerSecondSpinner = new DoubleField();
         zoomPerSecondSpinner.setEditable(true);
-        grid.add(new Label("Zoom per second:"), 0, 7);
-        grid.add(zoomPerSecondSpinner, 1, 7);
+        grid.add(new Label("Zoom per second:"), 0, 8);
+        grid.add(zoomPerSecondSpinner, 1, 8);
 
         return grid;
     }
