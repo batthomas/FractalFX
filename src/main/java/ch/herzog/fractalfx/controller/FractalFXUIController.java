@@ -12,6 +12,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
+import javafx.scene.layout.AnchorPane;
 
 import java.net.URL;
 import java.util.Optional;
@@ -26,6 +27,9 @@ public class FractalFXUIController implements Initializable {
 
     @FXML
     private ProgressBar mandelbrotProgress;
+
+    @FXML
+    private AnchorPane canvasContainer;
 
     @FXML
     private TreeView<Object> treeView;
@@ -48,6 +52,7 @@ public class FractalFXUIController implements Initializable {
                 Fractal fractal = (Fractal) newValue.getValue();
                 canvas.setWidth(fractal.getWidth());
                 canvas.setHeight(fractal.getHeight());
+                canvasContainer.setPrefSize(fractal.getWidth(), fractal.getHeight());
                 canvas.getGraphicsContext2D().drawImage(SwingFXUtils.toFXImage(fractal.getImage(), null), 0, 0);
             } else {
                 canvas.setWidth(0);
@@ -81,6 +86,7 @@ public class FractalFXUIController implements Initializable {
             VideoGenerationTask task = optional.get();
             canvas.setWidth(task.getFractal().getWidth());
             canvas.setHeight(task.getFractal().getHeight());
+            canvasContainer.setPrefSize(task.getFractal().getWidth(), task.getFractal().getHeight());
             mandelbrotProgress.progressProperty().bind(task.progressProperty());
             task.setOnSucceeded(event -> {
                 Fractal[] fractals = task.getValue();

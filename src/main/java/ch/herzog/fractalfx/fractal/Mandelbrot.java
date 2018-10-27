@@ -13,8 +13,18 @@ public class Mandelbrot extends Fractal {
     public void calculateFractal() {
         double minX = -2;
         double maxX = 1;
-        double minY = -1;
-        double maxY = 1;
+        double minY = -1.5;
+        double maxY = 1.5;
+
+        if (width > height) {
+            double shift = ((Math.abs(minX - maxX)) * width / height - Math.abs(minX - maxX)) / 2.0;
+            maxX += shift;
+            minX -= shift;
+        } else if (height > width) {
+            double shift = ((Math.abs(minY - maxY)) * height / width - Math.abs(minY - maxY)) / 2.0;
+            maxY += shift;
+            minY -= shift;
+        }
 
         double factorX = (maxX - minX) / width;
         double factorY = (minY - maxY) / height;
@@ -22,10 +32,9 @@ public class Mandelbrot extends Fractal {
         image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 
         for (int pixelX = 0; pixelX < width; pixelX++) {
+            double x = ((pixelX * factorX + minX) / scale) + centerX;
             for (int pixelY = 0; pixelY < height; pixelY++) {
-
-                double x = ((pixelX * factorX + minX) / scale) + centerX;
-                double y = ((pixelY * factorY + maxX) / scale) + centerY;
+                double y = ((pixelY * factorY + maxY) / scale) + centerY;
 
                 double zRe = 0;
                 double zIm = 0;

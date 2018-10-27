@@ -21,10 +21,10 @@ public class VideoGenerationTask extends ProfiledTask<Fractal[]> {
         Fractal[] fractals = new Fractal[seconds * framesPerSecond];
         for (int second = 0; second < seconds; second++) {
             for (int frame = 0; frame < framesPerSecond; frame++) {
-                Fractal copy = fractal.clone();
-                copy.setScale(copy.getScale() + (second * framesPerSecond + frame) * zoomPerSecond / framesPerSecond);
-                copy.calculateFractal();
-                fractals[second * framesPerSecond + frame] = copy;
+                fractal = fractal.clone();
+                fractal.setScale(fractal.getScale() + zoomPerSecond / framesPerSecond);
+                fractal.calculateFractal();
+                fractals[second * framesPerSecond + frame] = fractal;
                 updateProgress(second * framesPerSecond + frame, seconds * framesPerSecond - 1);
             }
         }
